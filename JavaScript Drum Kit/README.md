@@ -10,5 +10,11 @@ an audio will be played and a transition style will be changed on the button tha
  
   ![image](https://user-images.githubusercontent.com/89279264/181298248-01c71806-31ff-4b2b-9234-b3a66728daf5.png)
   
+  <br><br><br>
+  <h1 align='center'>✨ Playing with the piano ✨<h1>
   
-  <h2> Playing with the piano<h2>
+  <img width='45%' src=''>
+  <img width='45%' src=''>
+  <br>
+  <img width='45%' src=''>
+  <img width='45%' src=''>
