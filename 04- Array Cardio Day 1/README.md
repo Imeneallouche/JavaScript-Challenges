@@ -1,4 +1,4 @@
-<h1 align='center'>✨ Dev Tools Domination ✨</h1>
+<h1 align='center'>✨ Array Cardio Day 1 ✨</h1>
  <hr><br>
  
  <p align='center'> this challenge has been made to prcatise on array methods that are quite useful to use in building dynamic websites</p>
