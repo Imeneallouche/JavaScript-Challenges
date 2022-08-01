@@ -3,39 +3,42 @@ const AllCheckBoxes = document.querySelectorAll(
   ".inbox input[type = checkbox]"
 );
 
-const itIsShift = false;
+let lastBoxChecked;
+
+/*
+
+
+
+
+functions*/
+
+function handleTheCheck(EventSelected) {
+  //know the start and the end
+  let inBetween = false;
+
+  //check if the Shiftnkey is pressed
+  //check if the checkbox is checked
+  if (EventSelected.shiftKey && this.checked) {
+    AllCheckBoxes.forEach((checkbox) => {
+      if (checkbox === this || checkbox === lastBoxChecked) {
+        inBetween = !inBetween;
+      }
+
+      //all the interval between last checked and event selected (recently checked)
+      if (inBetween) {
+        checkbox.checked = true;
+      }
+    });
+  }
+  //update the last checked box
+  lastBoxChecked = this;
+}
 /*
 
 
 
 
 EVENT LISTNERES*/
-window.addEventListener("keyup", CheckIfShift);
-AllCheckBoxes.forEach((checkbox, index) =>
-  checkbox.addEventListener("click", startTheWork)
+AllCheckBoxes.forEach((checkbox) =>
+  checkbox.addEventListener("click", handleTheCheck)
 );
-/*
-
-
-
-
-
-functions*/
-function CheckIfShift(EventSelected) {
-  if (EventSelected.keyCode == 16) {
-    itIsShift = true;
-  } else {
-    itIsShift = false;
-  }
-}
-
-/*
-
-
-*/
-function startTheWork(EventSelected) {
-  console.log(EventSelected);
-}
-
-/*
- */
