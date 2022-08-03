@@ -1,0 +1,18 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.calculator {
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.calculator-screen {
+  flex: 1 1 100%;
+}
+button {
+  width: 33%;
+  flex: 1 1 33.333%;
+}
