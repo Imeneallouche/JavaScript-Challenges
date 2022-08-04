@@ -1,18 +1,41 @@
+html {
+  font-size: calc(10px + 0.3vw);
+}
 body {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+form {
+  width: fit-content;
+  background-color: cyan;
+  padding: 10px;
+  border-radius: 2%;
+}
+
+table {
+  width: 100%;
+}
+body {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
-.calculator {
-  width: 700px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.calculator-screen {
-  flex: 1 1 100%;
-}
+
 button {
-  width: 33%;
-  flex: 1 1 33.333%;
+  width: 100%;
+  padding: 20px;
+  color: white;
+  border-radius: 10%;
+  background-color: navy;
+}
+button:hover {
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  padding: 20px 0;
 }
