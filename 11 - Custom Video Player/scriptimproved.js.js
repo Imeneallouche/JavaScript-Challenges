@@ -5,6 +5,8 @@ const VideoProgress = player.querySelector(".progress__filled");
 const VideoProgressController = player.querySelector(".progress");
 const VideoPlayerController = player.querySelector(".player__button.toggle");
 const playerSliders = Array.from(player.querySelectorAll(".player__slider"));
+const videoSkipControllers = player.querySelectorAll("[data-skip]");
+console.log(videoSkipControllers);
 /*
 
 
@@ -41,10 +43,12 @@ function CheckTheKeyPressed(EventListenedTo) {
   //move 10s forward
   else {
     if (EventListenedTo.keyCode == 39) {
+      updateSkipVideo(videoSkipControllers[1]);
     }
 
     //move 10s backward
     else if (EventListenedTo.keyCode == 37) {
+      updateSkipVideo(videoSkipControllers[0]);
     }
   }
 }
@@ -90,9 +94,58 @@ function UpdatePlayeSliders(EventListenedTo) {
 
 
 
+
+
 let's deal with the width of video progress indicator*/
 videoplayed.addEventListener("timeupdate", VideoProgressIdicator);
 function VideoProgressIdicator() {
   const percentage = (videoplayed.currentTime / videoplayed.duration) * 100;
   VideoProgress.style.flexBasis = `${percentage}%`;
+}
+
+let mousedown = false;
+VideoProgressController.addEventListener("click", VideoPlayerAdjust);
+
+VideoProgressController.addEventListener(
+  "mousemove",
+  (EventListenedTo) => mousedown && VideoPlayerAdjust(EventListenedTo)
+);
+
+VideoProgressController.addEventListener("mousedown", () => (mousedown = true));
+
+VideoProgressController.addEventListener("mouseup", () => (mousedown = false));
+
+function VideoPlayerAdjust(EventListenedTo) {
+  const timeadjustement =
+    (EventListenedTo.offsetX / VideoProgressController.offsetWidth) *
+    videoplayed.duration;
+  console.log(timeadjustement);
+  videoplayed.currentTime = timeadjustement;
+}
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let"s deal with the skip forward and backward of the video*/
+
+videoSkipControllers.forEach((videoSkipController) =>
+  videoSkipController.addEventListener("click", (e) =>
+    updateSkipVideo(e.target)
+  )
+);
+
+function updateSkipVideo(EventListenedTo) {
+  videoplayed.currentTime += parseFloat(EventListenedTo.dataset.skip);
 }
