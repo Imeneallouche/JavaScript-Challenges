@@ -65,4 +65,4 @@ function checkSlide() {
 
 */
 
-window.addEventListener("scroll", debounce(checkSlide));
+window.addEventListener("scroll", debounce(checkSlide, 10));
