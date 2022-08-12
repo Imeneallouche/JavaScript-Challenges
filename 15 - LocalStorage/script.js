@@ -1,12 +1,78 @@
 const addItems = document.querySelector(".add-items");
 const itemsList = document.querySelector(".plates");
-const input = addItems.querySelector("input[name='item']");
+const items = JSON.parse(localStorage.getItem("items")) || [];
 
-const originalList = [...Array.from(itemsList.querySelectorAll("li"))].map(
-  (item) => item.innerHTML
-);
+/*
 
-const items = [];
+
+
+
+
+
+
+
+*/
+
+function addItem(e) {
+  e.preventDefault();
+  const text = this.querySelector("[name=item]").value;
+  const item = {
+    text,
+    done: false,
+  };
+
+  items.push(item);
+  populateList(items, itemsList);
+  localStorage.setItem("items", JSON.stringify(items));
+  this.reset();
+}
+
+/*
+
+
+
+
+
+
+
+
+*/
+
+function populateList(plates = [], platesList) {
+  platesList.innerHTML = plates
+    .map((plate, i) => {
+      return `
+    <li>
+      <input type="checkbox" data-index=${i} id="item${i}" ${
+        plate.done ? "checked" : ""
+      } />
+      <label for="item${i}">${plate.text}</label>
+    </li>
+  `;
+    })
+    .join("");
+}
+
+/*
+
+
+
+
+
+
+
+
+*/
+
+function toggleDone(e) {
+  if (!e.target.matches("input")) return; // skip this unless it's an input
+  const el = e.target;
+  const index = el.dataset.index;
+  items[index].done = !items[index].done;
+  localStorage.setItem("items", JSON.stringify(items));
+  populateList(items, itemsList);
+}
+
 /*
 
 
@@ -17,46 +83,8 @@ const items = [];
 
 
 EVENT LISTENERS*/
-addItems.addEventListener("submit", addListItem);
 
-/*
+addItems.addEventListener("submit", addItem);
+itemsList.addEventListener("click", toggleDone);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-FUNCTIONS*/
-function addListItem(eventListenedTo) {
-  eventListenedTo.preventDefault();
-
-  //add the item to the list
-  items.push(input.value);
-
-  //empty input field
-  input.value = "";
-
-  //empty the list
-  itemsList.innerHTML = "";
-
-  items.forEach((item, index) => {
-    itemsList.innerHTML += `
-    <li>
-      <input type="checkbox" id="${index}" name="plate" value="${item}">
-      <label for="${index}">${item}</label>
-    </li>
-    `;
-  });
-}
+populateList(items, itemsList);

@@ -1,46 +1,141 @@
 const addItems = document.querySelector(".add-items");
 const itemsList = document.querySelector(".plates");
-const items = JSON.parse(localStorage.getItem("items")) || [];
+const input = addItems.querySelector("input[name='item']");
 
-function addItem(e) {
-  e.preventDefault();
-  const text = this.querySelector("[name=item]").value;
+const originalList = [...Array.from(itemsList.querySelectorAll("li"))].map(
+  (item) => item.innerHTML
+);
+
+let items = JSON.parse(localStorage.getItem("items")) || [];
+
+/*
+
+
+
+
+
+
+
+
+
+
+FUNCTIONS*/
+function addListItem(eventListenedTo) {
+  eventListenedTo.preventDefault();
+
+  //add the item to the list
+  const text = input.value;
   const item = {
     text,
     done: false,
   };
-
   items.push(item);
-  populateList(items, itemsList);
+
+  //empty the list
+  itemsList.innerHTML = "";
+
+  //new html for the list
+  addInnerHTML(items, itemsList);
+
   localStorage.setItem("items", JSON.stringify(items));
+
+  //empty input fields
   this.reset();
 }
 
-function populateList(plates = [], platesList) {
+/*
+
+
+
+
+
+
+
+
+
+*/
+
+function addInnerHTML(plates = [], platesList) {
   platesList.innerHTML = plates
-    .map((plate, i) => {
+    .map((plate, index) => {
       return `
     <li>
-      <input type="checkbox" data-index=${i} id="item${i}" ${
+    <div>
+      <input type="checkbox" id="${index}" name="plate" value="${plate.text}" ${
         plate.done ? "checked" : ""
       } />
-      <label for="item${i}">${plate.text}</label>
-    </li>
-  `;
+      <label for="${index}">${plate.text}</label>
+    </div>
+
+    <button onclick='removePlate(${index})' class="delete_button">x</button>
+  </li>
+`;
     })
     .join("");
 }
 
-function toggleDone(e) {
-  if (!e.target.matches("input")) return; // skip this unless it's an input
-  const el = e.target;
-  const index = el.dataset.index;
-  items[index].done = !items[index].done;
-  localStorage.setItem("items", JSON.stringify(items));
-  populateList(items, itemsList);
+/*
+
+
+
+
+
+
+
+
+
+*/
+
+function removePlate(indexOfPlate = items.length) {
+  items.splice(indexOfPlate, 1);
+  console.log(items);
+
+  //empty the list
+  itemsList.innerHTML = "";
+
+  if (items.length == 0) {
+    originalList.forEach((originalitem) => {
+      const OriginalHTML = `<li>${originalitem}</li>`;
+      itemsList.innerHTML += OriginalHTML;
+    });
+    localStorage.setItem("items", JSON.stringify(items));
+  } else {
+    addInnerHTML(items, itemsList);
+  }
 }
 
-addItems.addEventListener("submit", addItem);
-itemsList.addEventListener("click", toggleDone);
+/*
 
-populateList(items, itemsList);
+
+
+
+
+
+
+
+
+*/
+
+function toggleDone(eventListenedTo) {
+  if (!eventListenedTo.target.matches("input")) return; // skip this unless it's an input
+  const el = eventListenedTo.target;
+  const index = el.id;
+  items[index].done = !items[index].done;
+  localStorage.setItem("items", JSON.stringify(items));
+  addInnerHTML(items, itemsList);
+}
+
+/*
+
+
+
+
+
+
+
+
+EVENT LISTENERS*/
+addItems.addEventListener("submit", addListItem);
+itemsList.addEventListener("click", toggleDone);
+addInnerHTML(items, itemsList);
+localStorage.setItem("items", JSON.stringify(items));
