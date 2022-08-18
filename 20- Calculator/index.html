@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="calculator">
+        <section class="calculator-body">
+            <div class="screen row">
+                <input type="text" type="text">
+            </div>
+            <div class="buttons row">
+                <button type="button" value="AC" onclick="eraseScreen()">AC</button>
+                <button type="button" value="C" onclick="Delete()">C</button>
+                <button type="button" value="%" onclick="writeIt(this)">%</button>
+                <button type="button" value="/" onclick="writeIt(this)">÷</button>
+            </div>
+            <div class="buttons row">
+                <button type="button" value="1" onclick="writeIt(this)">1</button>
+                <button type="button" value="2" onclick="writeIt(this)">2</button>
+                <button type="button" value="3" onclick="writeIt(this)">3</button>
+                <button type="button" value="*" onclick="writeIt(this)">x</button>
+            </div>
+            <div class="buttons row">
+                <button type="button" value="4" onclick="writeIt(this)">4</button>
+                <button type="button" value="5" onclick="writeIt(this)">5</button>
+                <button type="button" value="6" onclick="writeIt(this)">6</button>
+                <button type="button" value="+" onclick="writeIt(this)">+</button>
+            </div>
+            <div class="buttons row">
+                <button type="button" value="7" onclick="writeIt(this)">7</button>
+                <button type="button" value="8" onclick="writeIt(this)">8</button>
+                <button type="button" value="9" onclick="writeIt(this)">9</button>
+                <button type="button" value="-" onclick="writeIt(this)">-</button>
+            </div>
+            <div class="buttons row">
+                <button type="button" value="." onclick="writeIt(this)">.</button></td>
+                <button type="button" value="0" onclick="writeIt(this)">0</button></td>
+                <button type="button" value="=" onclick="MathIt()">=</button></td>
+            </div>
+        </section>
+
+        <section class="history">
+            <div class="calculator-history">
+                <ul>
+                    <li>history is empty</li>
+                </ul>
+            </div>
+            <button class="wipe-button">Wipe history</button>
+        </section>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

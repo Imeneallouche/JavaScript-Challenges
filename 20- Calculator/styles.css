@@ -1,0 +1,93 @@
+html {
+  font-size: 16px;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.calculator {
+  display: flex;
+}
+.calculator-body,
+.calculator-history {
+  width: 300px;
+  height: 500px;
+  background-color: #0f044c;
+}
+.history {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 40px;
+}
+button.wipe-button {
+  position: relative;
+  top: 15px;
+  padding: 20px;
+  cursor: pointer;
+}
+.calculator-body {
+  display: flex;
+  flex-direction: column;
+}
+.calculator-body .row {
+  flex: 1;
+  display: flex;
+}
+.calculator-body .row * {
+  flex: 1;
+  margin: 5px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.screen {
+  margin: 10px;
+}
+.buttons * {
+  border-radius: 5%;
+  background-color: #141e61;
+  color: white;
+}
+button:hover {
+  cursor: pointer;
+}
+.calculator-history {
+  overflow: scroll;
+}
+.calculator-history ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.historyItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.historyItem:nth-child(even) {
+  background-color: #1f3c88;
+}
+.historyItem:nth-child(odd) {
+  background-color: #5893d4;
+}
+.historyItem .reuse {
+  height: 40px;
+  width: 40px;
+  background-color: #c4ddff;
+}
+.historyItem .equation {
+  flex: 2;
+}
+.historyItem .result {
+  flex: 1;
+}
+.historyItem .reuse {
+  flex: 1;
+}
